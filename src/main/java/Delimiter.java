@@ -6,23 +6,23 @@ import java.util.regex.Pattern;
  */
 public class Delimiter {
 
-    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String DEFAULT_DELIMITERS = ",|:";
 
-    private static final int CUSTOM_DELIMITER_INDEX = 1;
-    private static final int CUSTOM_DELIMITER_VALUE_INDEX = 2;
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+    private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
+    private static final Integer MATCH_GROUP_DELIMITER = 1;
+    private static final Integer MATCH_GROUP_EXPRESSION = 2;
 
     private Delimiter() {}
 
     public static String[] splitString(String text) {
         String defaultText = defaultString(text);
-        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(defaultText);
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(defaultText);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(CUSTOM_DELIMITER_INDEX);
-            return matcher.group(CUSTOM_DELIMITER_VALUE_INDEX).split(customDelimiter);
+            String customDelimiter = matcher.group(MATCH_GROUP_DELIMITER);
+            return matcher.group(MATCH_GROUP_EXPRESSION).split(customDelimiter);
         }
 
-        return defaultText.split(DEFAULT_DELIMITER);
+        return defaultText.split(DEFAULT_DELIMITERS);
     }
 
     private static String defaultString(String text) {
