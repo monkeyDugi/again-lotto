@@ -1,3 +1,5 @@
+package stringAddCalculator;
+
 /**
  * 양수를 배열을 생성하는 역할
  */

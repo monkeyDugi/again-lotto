@@ -1,3 +1,5 @@
+package stringAddCalculator;
+
 /**
  * 문자열을 덧셈하는 역할
  */
