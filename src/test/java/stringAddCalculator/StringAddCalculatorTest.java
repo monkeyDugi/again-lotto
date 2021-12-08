@@ -1,34 +1,36 @@
+package stringAddCalculator;
+
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringAddCalculatorTest {
 
     @Test
     void sum_null_또는_빈문자() {
-        assertThat(StringAddCalculator.sum(null)).isZero();
-        assertThat(StringAddCalculator.sum("")).isZero();
+        Assertions.assertThat(StringAddCalculator.sum(null)).isZero();
+        Assertions.assertThat(StringAddCalculator.sum("")).isZero();
     }
 
     @Test
     void sum_숫자하나() {
-        assertThat(StringAddCalculator.sum("1")).isEqualTo(1);
+        Assertions.assertThat(StringAddCalculator.sum("1")).isEqualTo(1);
     }
 
     @Test
     void sum_쉼표구분자() {
-        assertThat(StringAddCalculator.sum("1,2")).isEqualTo(3);
+        Assertions.assertThat(StringAddCalculator.sum("1,2")).isEqualTo(3);
     }
 
     @Test
     void sum_쉼표_또는_콜론_구분자() {
-        assertThat(StringAddCalculator.sum("1,2:3")).isEqualTo(6);
+        Assertions.assertThat(StringAddCalculator.sum("1,2:3")).isEqualTo(6);
     }
 
     @Test
     void sum_custom_구분자() {
-        assertThat(StringAddCalculator.sum("//;\n1;2;3")).isEqualTo(6);
+        Assertions.assertThat(StringAddCalculator.sum("//;\n1;2;3")).isEqualTo(6);
     }
 
     @Test
