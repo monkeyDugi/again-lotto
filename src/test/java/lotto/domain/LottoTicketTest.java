@@ -16,10 +16,17 @@ class LottoTicketTest {
     @Test
     void validateSize() {
         // given
-        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+        List<LottoNumber> lottoLottoNumbers =
+                new ArrayList<>(Arrays.asList(new LottoNumber(1)
+                        , new LottoNumber(2)
+                        , new LottoNumber(3)
+                        , new LottoNumber(4)
+                        , new LottoNumber(5)
+                        , new LottoNumber(6)
+                        , new LottoNumber(7)));
 
         // when
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+        assertThatThrownBy(() -> new LottoTicket(lottoLottoNumbers))
                 // then
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 6개만 가능합니다.");
@@ -29,52 +36,44 @@ class LottoTicketTest {
     @Test
     void validateDuplicate() {
         // given
-        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 6, 6));
+        List<LottoNumber> lottoLottoNumbers =
+                new ArrayList<>(Arrays.asList(new LottoNumber(1)
+                        , new LottoNumber(2)
+                        , new LottoNumber(3)
+                        , new LottoNumber(4)
+                        , new LottoNumber(6)
+                        , new LottoNumber(6)));
 
         // when
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+        assertThatThrownBy(() -> new LottoTicket(lottoLottoNumbers))
                 // then
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호들은 중복될 수 없습니다.");
     }
 
-    @DisplayName("로또 번호는 1이상이어야 합니다.")
-    @Test
-    void validateMinimumNumber() {
-        // given
-        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 6, 0));
-
-        // when
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                // then
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 1이상이어야 합니다.");
-    }
-
-    @DisplayName("로또 번호는 45이하이어야 합니다.")
-    @Test
-    void validateMaximumNumber() {
-        // given
-        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 6, 46));
-
-        // when
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                // then
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 45이하이어야 합니다.");
-    }
-
     @DisplayName("당첨된 번호의 개수를 구한다.")
     @Test
-    void getNumberOfWins() {
+    void getLottoNumberOfWins() {
         // given
-        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
+        List<LottoNumber> lottoLottoNumbers =
+                new ArrayList<>(Arrays.asList(new LottoNumber(1)
+                        , new LottoNumber(2)
+                        , new LottoNumber(3)
+                        , new LottoNumber(4)
+                        , new LottoNumber(5)
+                        , new LottoNumber(6)));
+        List<LottoNumber> winningLottoNumbers =
+                new ArrayList<>(Arrays.asList(new LottoNumber(1)
+                        , new LottoNumber(2)
+                        , new LottoNumber(3)
+                        , new LottoNumber(4)
+                        , new LottoNumber(5)
+                        , new LottoNumber(7)));
 
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket lottoTicket = new LottoTicket(lottoLottoNumbers);
 
         // when
-        int numberOfWins = lottoTicket.getNumberOfWins(winningNumbers);
+        int numberOfWins = lottoTicket.getNumberOfWins(winningLottoNumbers);
 
         // then
         assertThat(numberOfWins).isEqualTo(5);
