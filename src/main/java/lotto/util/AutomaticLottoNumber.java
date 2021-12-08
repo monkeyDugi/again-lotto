@@ -26,7 +26,7 @@ public class AutomaticLottoNumber {
         }
     }
 
-    public List<LottoNumber> createNumbers() {
+    public static List<LottoNumber> createNumbers() {
         Collections.shuffle(numbers);
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();

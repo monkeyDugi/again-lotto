@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.AutomaticLottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -77,5 +78,15 @@ class LottoTicketTest {
 
         // then
         assertThat(numberOfWins).isEqualTo(5);
+    }
+
+    @DisplayName("6개의 번호를 가진 티켓이 생성된다.")
+    @Test
+    void createLottoTicket() {
+        // when
+        List<LottoNumber> lottoNumbers = AutomaticLottoNumber.createNumbers();
+
+        // then
+        assertThat(lottoNumbers.size()).isEqualTo(6);
     }
 }
