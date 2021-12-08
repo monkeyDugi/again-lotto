@@ -11,7 +11,7 @@ public class LottoTicket {
     private static final int LOTTO_MINIMUM_NUMBER = 1;
     private static final int LOTTO_MAXIMUM_NUMBER = 45;
 
-    private List<Integer> lottoNumbers;
+    private final List<Integer> lottoNumbers;
 
     public LottoTicket(List<Integer> lottoNumbers) {
         validateSize(lottoNumbers);
