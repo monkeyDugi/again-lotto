@@ -49,4 +49,9 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또 번호는 45이하이어야 합니다.");
         }
     }
+
+    public int getNumberOfWins(List<Integer> winningNumbers) {
+        winningNumbers.retainAll(lottoNumbers);
+        return winningNumbers.size();
+    }
 }

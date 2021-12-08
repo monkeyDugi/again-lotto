@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketTest {
@@ -61,5 +62,21 @@ class LottoTicketTest {
                 // then
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 45이하이어야 합니다.");
+    }
+
+    @DisplayName("당첨된 번호의 개수를 구한다.")
+    @Test
+    void getNumberOfWins() {
+        // given
+        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
+
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+
+        // when
+        int numberOfWins = lottoTicket.getNumberOfWins(winningNumbers);
+
+        // then
+        assertThat(numberOfWins).isEqualTo(5);
     }
 }
