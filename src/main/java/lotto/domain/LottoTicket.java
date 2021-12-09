@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -32,9 +33,10 @@ public class LottoTicket {
         }
     }
 
-    public int getNumberOfWins(List<LottoNumber> winningNumbers) {
-        winningNumbers.retainAll(lottoNumbers);
-        return winningNumbers.size();
+    public int getCountOfMatch(List<LottoNumber> winningNumbers) {
+        List<LottoNumber> copyWinningNumbers = new ArrayList<>(winningNumbers);
+        copyWinningNumbers.retainAll(lottoNumbers);
+        return copyWinningNumbers.size();
     }
 
     @Override
@@ -48,5 +50,10 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }

@@ -74,7 +74,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoLottoNumbers);
 
         // when
-        int numberOfWins = lottoTicket.getNumberOfWins(winningLottoNumbers);
+        int numberOfWins = lottoTicket.getCountOfMatch(winningLottoNumbers);
 
         // then
         assertThat(numberOfWins).isEqualTo(5);

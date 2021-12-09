@@ -3,17 +3,22 @@ package lotto.domain;
 import lotto.util.AutomaticLottoNumber;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
 
     private static final int TICKET_PRICE = 1000;
 
-    private final List<LottoTicket> lottoTickets = new ArrayList<>();
+    private List<LottoTicket> lottoTickets;
 
     public LottoTickets(int price) {
         validatePrice(price);
         createLottoTickets(price);
+    }
+
+    LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
     }
 
     private void validatePrice(int price) {
@@ -27,11 +32,16 @@ public class LottoTickets {
     }
 
     private void createLottoTickets(int price) {
+        lottoTickets = new ArrayList<>();
         int ticketCount = price / TICKET_PRICE;
 
         for (int i = 0; i < ticketCount; i++) {
             lottoTickets.add(new LottoTicket(AutomaticLottoNumber.createNumbers()));
         }
+    }
+
+    public List<LottoTicket> get() {
+        return Collections.unmodifiableList(lottoTickets);
     }
 
     public int size() {
