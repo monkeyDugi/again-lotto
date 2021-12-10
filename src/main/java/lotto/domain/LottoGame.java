@@ -8,10 +8,8 @@ import java.util.Map;
 
 public class LottoGame {
 
-    private static final int TICKET_PRICE = 1_000;
-
     private final LottoTickets lottoTickets;
-    private int purchaseAmount;
+    private final int purchaseAmount;
 
     public LottoGame(LottoTickets lottoTickets, int purchaseAmount) {
         this.lottoTickets = lottoTickets;

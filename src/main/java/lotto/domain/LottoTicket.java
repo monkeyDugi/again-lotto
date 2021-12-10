@@ -36,6 +36,7 @@ public class LottoTicket {
     public int getCountOfMatch(List<LottoNumber> winningNumbers) {
         List<LottoNumber> copyWinningNumbers = new ArrayList<>(winningNumbers);
         copyWinningNumbers.retainAll(lottoNumbers);
+
         return copyWinningNumbers.size();
     }
 
