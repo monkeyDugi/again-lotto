@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.UI.InputView;
 import lotto.UI.ResultView;
 
-import java.util.Set;
+import java.util.List;
 
 public class Controller {
 
@@ -12,7 +12,7 @@ public class Controller {
         LottoGame lottoGame = new LottoGame(purchaseAmount);
         InputView.confirmPurchaseCount(purchaseAmount, lottoGame.get());
 
-        Set<LottoNumber> winningNumbers = ResultView.requireWinningNumber();
+        List<LottoNumber> winningNumbers = ResultView.requireWinningNumber();
         WinningStatistics winningStatistics = new WinningStatistics(lottoGame.get(), winningNumbers);
         ResultView.printWinningStats(winningStatistics);
     }

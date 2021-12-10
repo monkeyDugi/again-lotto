@@ -4,20 +4,20 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.WinningStatistics;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 public class ResultView {
 
     private static final Scanner sc = new Scanner(System.in);
 
-    public static Set<LottoNumber> requireWinningNumber() {
+    public static List<LottoNumber> requireWinningNumber() {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
 
-        Set<LottoNumber> winningNumbers = new HashSet<>();
+        List<LottoNumber> winningNumbers = new ArrayList<>();
         String[] winningNumberArr = sc.nextLine().split(",");
         for (String winningNumber : winningNumberArr) {
             winningNumbers.add(new LottoNumber(Integer.parseInt(winningNumber)));

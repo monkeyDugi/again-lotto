@@ -73,8 +73,8 @@ class LottoTicketsTest {
                         , new LottoNumber(4)
                         , new LottoNumber(5)
                         , new LottoNumber(7)));
-        Set<LottoNumber> winningLottoNumbers =
-                new HashSet<>(Arrays.asList(new LottoNumber(1)
+        List<LottoNumber> winningLottoNumbers =
+                new ArrayList<>(Arrays.asList(new LottoNumber(1)
                         , new LottoNumber(2)
                         , new LottoNumber(3)
                         , new LottoNumber(10)

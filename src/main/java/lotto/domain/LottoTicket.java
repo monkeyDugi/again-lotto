@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,8 +19,8 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int getCountOfMatch(Set<LottoNumber> winningNumbers) {
-        Set<LottoNumber> copyWinningNumbers = new HashSet<>(winningNumbers);
+    public int getCountOfMatch(List<LottoNumber> winningNumbers) {
+        List<LottoNumber> copyWinningNumbers = new ArrayList<>(winningNumbers);
         copyWinningNumbers.retainAll(lottoNumbers);
 
         return copyWinningNumbers.size();
