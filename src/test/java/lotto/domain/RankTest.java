@@ -10,7 +10,7 @@ class RankTest {
 
     @DisplayName("당첨 개수에 맞는 Rank를 반환한다.")
     @Test
-    void valueOfCountOfMathc() {
+    void valueOfCountOfMatch() {
         // given
         int firstPriceCountOfMatch = 6;
         int secondPriceCountOfMatch = 5;
