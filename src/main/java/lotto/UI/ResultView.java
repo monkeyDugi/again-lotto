@@ -17,13 +17,13 @@ public class ResultView {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
 
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        String[] winningNumbers = sc.nextLine().split(",");
-        for (String winningNumber : winningNumbers) {
-            lottoNumbers.add(new LottoNumber(Integer.parseInt(winningNumber)));
+        Set<LottoNumber> winningNumbers = new HashSet<>();
+        String[] winningNumberArr = sc.nextLine().split(",");
+        for (String winningNumber : winningNumberArr) {
+            winningNumbers.add(new LottoNumber(Integer.parseInt(winningNumber)));
         }
 
-        return lottoNumbers;
+        return winningNumbers;
     }
 
     public static void printWinningStats(WinningStatistics winningStatistics) {
