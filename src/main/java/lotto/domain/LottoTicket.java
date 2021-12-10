@@ -8,7 +8,10 @@ import java.util.Set;
 
 public class LottoTicket {
 
-    private static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int TICKET_PRICE = 1000;
+    public static final int LOTTO_MINIMUM_NUMBER = 1;
+    public static final int LOTTO_MAXIMUM_NUMBER = 45;
 
     private final List<LottoNumber> lottoNumbers;
 

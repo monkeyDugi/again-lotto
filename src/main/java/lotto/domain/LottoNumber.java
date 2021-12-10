@@ -4,9 +4,6 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private static final int LOTTO_MINIMUM_NUMBER = 1;
-    private static final int LOTTO_MAXIMUM_NUMBER = 45;
-
     private final int number;
 
     public LottoNumber(int number) {
@@ -17,13 +14,13 @@ public class LottoNumber {
     }
 
     private void validateMinimumNumber(int number) {
-        if (LOTTO_MINIMUM_NUMBER > number) {
+        if (LottoTicket.LOTTO_MINIMUM_NUMBER > number) {
             throw new IllegalArgumentException("로또 번호는 1이상이어야 합니다.");
         }
     }
 
     private void validateMaximumNumber(int number) {
-        if (LOTTO_MAXIMUM_NUMBER < number) {
+        if (LottoTicket.LOTTO_MAXIMUM_NUMBER < number) {
             throw new IllegalArgumentException("로또 번호는 45이하이어야 합니다.");
         }
     }

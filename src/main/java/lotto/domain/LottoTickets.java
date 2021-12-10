@@ -10,8 +10,6 @@ import java.util.Objects;
 
 public class LottoTickets {
 
-    private static final int TICKET_PRICE = 1000;
-
     private List<LottoTicket> lottoTickets;
     private final int purchaseAmount;
 
@@ -52,18 +50,18 @@ public class LottoTickets {
     }
 
     private void validatePrice(int purchaseAmount) {
-        if (purchaseAmount < TICKET_PRICE) {
-            throw new IllegalArgumentException("최소 구매 금액은 " + TICKET_PRICE + "원 입니다.");
+        if (purchaseAmount < LottoTicket.TICKET_PRICE) {
+            throw new IllegalArgumentException("최소 구매 금액은 " + LottoTicket.TICKET_PRICE + "원 입니다.");
         }
 
-        if (purchaseAmount % TICKET_PRICE != 0) {
-            throw new IllegalArgumentException("구매 금액은 " + TICKET_PRICE + "원 단위만 가능합니다.");
+        if (purchaseAmount % LottoTicket.TICKET_PRICE != 0) {
+            throw new IllegalArgumentException("구매 금액은 " + LottoTicket.TICKET_PRICE + "원 단위만 가능합니다.");
         }
     }
 
     private void createLottoTickets(int purchaseAmount) {
         lottoTickets = new ArrayList<>();
-        int ticketCount = purchaseAmount / TICKET_PRICE;
+        int ticketCount = purchaseAmount / LottoTicket.TICKET_PRICE;
 
         for (int i = 0; i < ticketCount; i++) {
             lottoTickets.add(new LottoTicket(AutomaticLottoNumber.createNumbers()));

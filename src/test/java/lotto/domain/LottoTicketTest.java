@@ -87,6 +87,6 @@ class LottoTicketTest {
         List<LottoNumber> lottoNumbers = AutomaticLottoNumber.createNumbers();
 
         // then
-        assertThat(lottoNumbers.size()).isEqualTo(6);
+        assertThat(lottoNumbers.size()).isEqualTo(LottoTicket.LOTTO_NUMBERS_SIZE);
     }
 }
