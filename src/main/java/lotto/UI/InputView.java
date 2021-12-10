@@ -1,8 +1,8 @@
 package lotto.UI;
 
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -16,10 +16,10 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public static void confirmPurchaseCount(int purchaseAmount, List<LottoTicket> lottoTickets) {
+    public static void confirmPurchaseCount(int purchaseAmount, LottoTickets lottoTickets) {
         System.out.println(purchaseAmount / TICKET_PRICE + "개를 구매했습니다.");
 
-        for (LottoTicket lottoTicket : lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.get()) {
             System.out.println(lottoTicket);
         }
     }

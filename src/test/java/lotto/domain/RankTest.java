@@ -3,6 +3,10 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static lotto.domain.Rank.MISS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -30,7 +34,7 @@ class RankTest {
         assertThat(secondRank).isEqualTo(Rank.SECOND_PRICE);
         assertThat(thirdRank).isEqualTo(Rank.THIRD_PRICE);
         assertThat(fourRank).isEqualTo(Rank.FOUR_PRICE);
-        assertThat(missRank).isEqualTo(Rank.MISS);
+        assertThat(missRank).isEqualTo(MISS);
     }
 
     @DisplayName("맞춘 개수는 0보다 작을 수 없고, 6보다 클 수 없다.")
@@ -51,5 +55,24 @@ class RankTest {
                 // then
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("맞춘 개수는 6보다 클 수 없습니다.");
+    }
+
+    @DisplayName("MISS를 제외한 모든 value를 Map으로 반환한다. 각각 값은 0이다.")
+    @Test
+    void getDefaultRanks() {
+        // given
+        Map<Rank, Integer> expectedRanks = new LinkedHashMap<>();
+        Rank[] rankArr = Rank.values();
+        for (Rank rank : rankArr) {
+            expectedRanks.put(rank, 0);
+        }
+
+        expectedRanks.remove(Rank.MISS);
+
+        // when
+        Map<Rank, Integer> defaultRanks = Rank.getDefaultRanks();
+
+        // then
+        assertThat(defaultRanks).isEqualTo(expectedRanks);
     }
 }

@@ -10,9 +10,10 @@ public class Controller {
     public static void run() {
         int purchaseAmount = InputView.requirePurchaseAmount();
         LottoGame lottoGame = new LottoGame(purchaseAmount);
-        InputView.confirmPurchaseCount(purchaseAmount, lottoGame.getLottoTickets());
+        InputView.confirmPurchaseCount(purchaseAmount, lottoGame.get());
 
         List<LottoNumber> winningNumbers = ResultView.requireWinningNumber();
-        ResultView.printWinningStats(lottoGame, winningNumbers);
+        WinningStatistics winningStatistics = new WinningStatistics(lottoGame.get(), winningNumbers);
+        ResultView.printWinningStats(winningStatistics);
     }
 }

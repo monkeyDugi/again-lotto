@@ -1,8 +1,8 @@
 package lotto.UI;
 
-import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
+import lotto.domain.WinningStatistics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,8 @@ public class ResultView {
         return lottoNumbers;
     }
 
-    public static void printWinningStats(LottoGame lottoGame, List<LottoNumber> winningNumbers) {
-        Map<Rank, Integer> byRankCountOfMatches = lottoGame.getByRankCountOfMatches(winningNumbers);
+    public static void printWinningStats(WinningStatistics winningStatistics) {
+        Map<Rank, Integer> byRankCountOfMatches = winningStatistics.getByRankCountOfMatches();
         for (Rank rank : byRankCountOfMatches.keySet()) {
             int byRankCountOfMatch = byRankCountOfMatches.get(rank);
             int winningAmount = rank.getWinningAmount();
@@ -36,6 +36,6 @@ public class ResultView {
             System.out.println(countOfMatch + "개 일치 (" + winningAmount + "원) - " + byRankCountOfMatch + "개");
         }
 
-        System.out.println("총 수익률을 " + lottoGame.calculateYields(winningNumbers) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println("총 수익률을 " + winningStatistics.calculateYields() + "입니다.");
     }
 }

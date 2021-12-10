@@ -251,12 +251,14 @@ public class StringAddCalculatorTest {
 - git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 목록 단위로 추가한다.
 
 ### 역할 분리
-- 흐름 제어
+- 흐름 제어(Controller)
 - 로또 번호 각각에 대한 검증  
 - 로또 번호 자동 생성
 - 로또 1장 발급
 - 로또 여러 장 발급
-- 당첨 통계
+  - 순위별 당첨 갯수 조회
+- 게임 실행
+- 당첨 통계 조회
 - UI
 
 ### 요구사항 분리

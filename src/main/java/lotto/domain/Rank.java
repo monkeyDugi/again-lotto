@@ -1,12 +1,14 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
  * 당첨금 관리
  */
-public enum Rank {
+public enum Rank extends LottoTicket {
 
     FIRST_PRICE(6, 2_000_000_000),
     SECOND_PRICE(5, 1_500_000),
@@ -46,6 +48,19 @@ public enum Rank {
 
     private boolean equalsCountOfMatch(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
+    }
+
+    public static Map<Rank, Integer> getDefaultRanks() {
+        Map<Rank, Integer> ranks = new LinkedHashMap<>();
+
+        Rank[] rankArr = Rank.values();
+        for (Rank rank : rankArr) {
+            ranks.put(rank, 0);
+        }
+
+        ranks.remove(MISS);
+
+        return ranks;
     }
 
     public int getWinningAmount() {
