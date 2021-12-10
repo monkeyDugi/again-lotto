@@ -1,0 +1,41 @@
+package lotto.UI;
+
+import lotto.domain.LottoNumber;
+import lotto.domain.Rank;
+import lotto.domain.WinningStatistics;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+public class ResultView {
+
+    private static final Scanner sc = new Scanner(System.in);
+
+    public static List<LottoNumber> requireWinningNumber() {
+        System.out.println();
+        System.out.println("지난 주 당첨 번호를 입력해 주세요");
+
+        List<LottoNumber> winningNumbers = new ArrayList<>();
+        String[] winningNumberArr = sc.nextLine().split(",");
+        for (String winningNumber : winningNumberArr) {
+            winningNumbers.add(new LottoNumber(Integer.parseInt(winningNumber)));
+        }
+
+        return winningNumbers;
+    }
+
+    public static void printWinningStats(WinningStatistics winningStatistics) {
+        Map<Rank, Integer> byRankCountOfMatches = winningStatistics.getByRankCountOfMatches();
+        for (Rank rank : byRankCountOfMatches.keySet()) {
+            int byRankCountOfMatch = byRankCountOfMatches.get(rank);
+            int winningAmount = rank.getWinningAmount();
+            int countOfMatch = rank.getCountOfMatch();
+
+            System.out.println(countOfMatch + "개 일치 (" + winningAmount + "원) - " + byRankCountOfMatch + "개");
+        }
+
+        System.out.println("총 수익률을 " + winningStatistics.calculateYields() + "입니다.");
+    }
+}
