@@ -39,7 +39,7 @@ class WinningStatisticsTest {
         int purchaseAmount = 14000;
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList, purchaseAmount);
 
-        WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers);
+        WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers, 30);
 
         // when
         double yields = winningStatistics.calculateYields();

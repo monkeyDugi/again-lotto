@@ -26,6 +26,10 @@ public class LottoTicket {
         return copyWinningNumbers.size();
     }
 
+    public boolean equalsMatchBonus(int bonusNumber) {
+        return lottoNumbers.contains(new LottoNumber(bonusNumber));
+    }
+
     private void validateSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");

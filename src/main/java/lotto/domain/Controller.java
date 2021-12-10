@@ -13,7 +13,8 @@ public class Controller {
         InputView.confirmPurchaseCount(purchaseAmount, lottoGame.get());
 
         List<LottoNumber> winningNumbers = ResultView.requireWinningNumber();
-        WinningStatistics winningStatistics = new WinningStatistics(lottoGame.get(), winningNumbers);
+        int bonusNumber = ResultView.requireBonusNumber();
+        WinningStatistics winningStatistics = new WinningStatistics(lottoGame.get(), winningNumbers, bonusNumber);
         ResultView.printWinningStats(winningStatistics);
     }
 }
