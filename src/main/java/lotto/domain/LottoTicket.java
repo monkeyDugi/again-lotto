@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.util.AutomaticLottoNumber;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +19,13 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public int getCountOfMatch(List<LottoNumber> winningNumbers) {
+        List<LottoNumber> copyWinningNumbers = new ArrayList<>(winningNumbers);
+        copyWinningNumbers.retainAll(lottoNumbers);
+
+        return copyWinningNumbers.size();
+    }
+
     private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
@@ -33,13 +38,6 @@ public class LottoTicket {
         if (nonDuplicateNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 번호들은 중복될 수 없습니다.");
         }
-    }
-
-    public int getCountOfMatch(List<LottoNumber> winningNumbers) {
-        List<LottoNumber> copyWinningNumbers = new ArrayList<>(winningNumbers);
-        copyWinningNumbers.retainAll(lottoNumbers);
-
-        return copyWinningNumbers.size();
     }
 
     @Override

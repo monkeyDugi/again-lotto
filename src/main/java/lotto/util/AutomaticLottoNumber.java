@@ -20,12 +20,6 @@ public class AutomaticLottoNumber {
         createTotalNumbers();
     }
 
-    private static void createTotalNumbers() {
-        for (int i = FROM_NUMBER; i <= TO_NUMBER; i++) {
-            numbers.add(new LottoNumber(i));
-        }
-    }
-
     public static List<LottoNumber> createNumbers() {
         Collections.shuffle(numbers);
 
@@ -35,5 +29,11 @@ public class AutomaticLottoNumber {
         }
 
         return lottoNumbers;
+    }
+
+    private static void createTotalNumbers() {
+        for (int i = FROM_NUMBER; i <= TO_NUMBER; i++) {
+            numbers.add(new LottoNumber(i));
+        }
     }
 }

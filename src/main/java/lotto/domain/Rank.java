@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 /**
  * 당첨금 관리
  */
-public enum Rank extends LottoTicket {
+public enum Rank {
 
     FIRST_PRICE(6, 2_000_000_000),
     SECOND_PRICE(5, 1_500_000),
@@ -36,20 +36,6 @@ public enum Rank extends LottoTicket {
                      .orElse(MISS);
     }
 
-    private static void validateCountOfMatch(int countOfMatch) {
-        if (countOfMatch < MINIMUM_COUNT_OF_MATCH) {
-            throw new IllegalArgumentException("맞춘 개수는 " + MINIMUM_COUNT_OF_MATCH + "보다 작을 수 없습니다.");
-        }
-
-        if (countOfMatch > MAXIMUM_COUNT_OF_MATCH) {
-            throw new IllegalArgumentException("맞춘 개수는 " + MAXIMUM_COUNT_OF_MATCH + "보다 클 수 없습니다.");
-        }
-    }
-
-    private boolean equalsCountOfMatch(int countOfMatch) {
-        return this.countOfMatch == countOfMatch;
-    }
-
     public static Map<Rank, Integer> getDefaultRanks() {
         Map<Rank, Integer> ranks = new LinkedHashMap<>();
 
@@ -69,5 +55,19 @@ public enum Rank extends LottoTicket {
 
     public int getCountOfMatch() {
         return countOfMatch;
+    }
+
+    private static void validateCountOfMatch(int countOfMatch) {
+        if (countOfMatch < MINIMUM_COUNT_OF_MATCH) {
+            throw new IllegalArgumentException("맞춘 개수는 " + MINIMUM_COUNT_OF_MATCH + "보다 작을 수 없습니다.");
+        }
+
+        if (countOfMatch > MAXIMUM_COUNT_OF_MATCH) {
+            throw new IllegalArgumentException("맞춘 개수는 " + MAXIMUM_COUNT_OF_MATCH + "보다 클 수 없습니다.");
+        }
+    }
+
+    private boolean equalsCountOfMatch(int countOfMatch) {
+        return this.countOfMatch == countOfMatch;
     }
 }
