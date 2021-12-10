@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,34 +11,28 @@ public class LottoTicket {
     public static final int LOTTO_MINIMUM_NUMBER = 1;
     public static final int LOTTO_MAXIMUM_NUMBER = 45;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(Set<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
-        validateDuplicate(lottoNumbers);
-
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int getCountOfMatch(List<LottoNumber> winningNumbers) {
-        List<LottoNumber> copyWinningNumbers = new ArrayList<>(winningNumbers);
+    public int getCountOfMatch(Set<LottoNumber> winningNumbers) {
+        Set<LottoNumber> copyWinningNumbers = new HashSet<>(winningNumbers);
         copyWinningNumbers.retainAll(lottoNumbers);
 
         return copyWinningNumbers.size();
     }
 
-    private void validateSize(List<LottoNumber> lottoNumbers) {
+    private void validateSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
         }
     }
 
-    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
-
-        if (nonDuplicateNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("로또 번호들은 중복될 수 없습니다.");
-        }
+    public int size() {
+        return lottoNumbers.size();
     }
 
     @Override

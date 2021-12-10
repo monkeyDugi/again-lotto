@@ -5,19 +5,21 @@ import lotto.domain.Rank;
 import lotto.domain.WinningStatistics;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class ResultView {
 
     private static final Scanner sc = new Scanner(System.in);
 
-    public static List<LottoNumber> requireWinningNumber() {
+    public static Set<LottoNumber> requireWinningNumber() {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
 
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         String[] winningNumbers = sc.nextLine().split(",");
         for (String winningNumber : winningNumbers) {
             lottoNumbers.add(new LottoNumber(Integer.parseInt(winningNumber)));

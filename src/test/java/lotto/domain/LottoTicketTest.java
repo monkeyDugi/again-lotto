@@ -6,19 +6,21 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketTest {
 
-    @DisplayName("로또 번호는 6개만 가능하다.")
+    @DisplayName("로또 번호는 6개 보다 클 수 없다.")
     @Test
-    void validateSize() {
+    void validateMaximumSize() {
         // given
-        List<LottoNumber> lottoLottoNumbers =
-                new ArrayList<>(Arrays.asList(new LottoNumber(1)
+        Set<LottoNumber> lottoLottoNumbers =
+                new HashSet<>(Arrays.asList(new LottoNumber(1)
                         , new LottoNumber(2)
                         , new LottoNumber(3)
                         , new LottoNumber(4)
@@ -33,38 +35,57 @@ class LottoTicketTest {
                 .hasMessage("로또 번호는 6개만 가능합니다.");
     }
 
-    @DisplayName("로또 번호들은 중복될 수 없다.")
+    @DisplayName("로또 번호는 6개 보다 작을 수 없다.")
     @Test
-    void validateDuplicate() {
+    void validateMinimumSize() {
         // given
-        List<LottoNumber> lottoLottoNumbers =
-                new ArrayList<>(Arrays.asList(new LottoNumber(1)
+        Set<LottoNumber> lottoLottoNumbers =
+                new HashSet<>(Arrays.asList(new LottoNumber(1)
                         , new LottoNumber(2)
                         , new LottoNumber(3)
                         , new LottoNumber(4)
-                        , new LottoNumber(6)
-                        , new LottoNumber(6)));
+                        , new LottoNumber(7)));
 
         // when
         assertThatThrownBy(() -> new LottoTicket(lottoLottoNumbers))
                 // then
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호들은 중복될 수 없습니다.");
+                .hasMessage("로또 번호는 6개만 가능합니다.");
+    }
+
+    @DisplayName("로또 번호들은 중복될 수 없다. 무조건 6개를 넘어도 6개가 생성된다.")
+    @Test
+    void validateDuplicate() {
+        // given
+        Set<LottoNumber> lottoLottoNumbers =
+                new HashSet<>(Arrays.asList(new LottoNumber(1)
+                        , new LottoNumber(2)
+                        , new LottoNumber(3)
+                        , new LottoNumber(4)
+                        , new LottoNumber(5)
+                        , new LottoNumber(6)
+                        , new LottoNumber(6)));
+
+        // when
+        LottoTicket lottoTicket = new LottoTicket(lottoLottoNumbers);
+
+        // then
+        assertThat(lottoTicket.size()).isEqualTo(LottoTicket.LOTTO_NUMBERS_SIZE);
     }
 
     @DisplayName("당첨된 번호의 개수를 구한다.")
     @Test
     void getLottoNumberOfWins() {
         // given
-        List<LottoNumber> lottoLottoNumbers =
-                new ArrayList<>(Arrays.asList(new LottoNumber(1)
+        Set<LottoNumber> lottoLottoNumbers =
+                new HashSet<>(Arrays.asList(new LottoNumber(1)
                         , new LottoNumber(2)
                         , new LottoNumber(3)
                         , new LottoNumber(4)
                         , new LottoNumber(5)
                         , new LottoNumber(6)));
-        List<LottoNumber> winningLottoNumbers =
-                new ArrayList<>(Arrays.asList(new LottoNumber(1)
+        Set<LottoNumber> winningLottoNumbers =
+                new HashSet<>(Arrays.asList(new LottoNumber(1)
                         , new LottoNumber(2)
                         , new LottoNumber(3)
                         , new LottoNumber(4)
@@ -84,7 +105,7 @@ class LottoTicketTest {
     @Test
     void createLottoTicket() {
         // when
-        List<LottoNumber> lottoNumbers = AutomaticLottoNumber.createNumbers();
+        Set<LottoNumber> lottoNumbers = AutomaticLottoNumber.createNumbers();
 
         // then
         assertThat(lottoNumbers.size()).isEqualTo(LottoTicket.LOTTO_NUMBERS_SIZE);

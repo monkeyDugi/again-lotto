@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class LottoTickets {
 
@@ -25,7 +26,7 @@ public class LottoTickets {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public Map<Rank, Integer> getByRankCountOfMatches(List<LottoNumber> winningNumbers) {
+    public Map<Rank, Integer> getByRankCountOfMatches(Set<LottoNumber> winningNumbers) {
         Map<Rank, Integer> ranks = Rank.getDefaultRanks();
         for (LottoTicket lottoTicket : lottoTickets) {
             int countOfMatch = lottoTicket.getCountOfMatch(winningNumbers);
