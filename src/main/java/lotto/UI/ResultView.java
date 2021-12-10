@@ -4,9 +4,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.WinningStatistics;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
