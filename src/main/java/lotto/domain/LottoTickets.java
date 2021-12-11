@@ -10,18 +10,31 @@ import java.util.Objects;
 
 public class LottoTickets {
 
-    private List<LottoTicket> lottoTickets;
+    private static final int DEFAULT_MANUAL_LOTTO_TICKET_COUNT = 0;
+
+    private List<LottoTicket> lottoTickets = new ArrayList<>();
     private final int purchaseAmount;
 
     public LottoTickets(int purchaseAmount) {
         validatePrice(purchaseAmount);
-        createLottoTickets(purchaseAmount);
+        createAutoLottoTickets(purchaseAmount, DEFAULT_MANUAL_LOTTO_TICKET_COUNT);
 
         this.purchaseAmount = purchaseAmount;
     }
 
     public LottoTickets(List<LottoTicket> lottoTickets, int purchaseAmount) {
+        validateSize(lottoTickets);
+        validatePrice(purchaseAmount);
+
         this.lottoTickets = lottoTickets;
+        this.purchaseAmount = purchaseAmount;
+    }
+
+    public LottoTickets(ManualLottoTickets manualLottoTickets, int purchaseAmount) {
+        validateSize(manualLottoTickets.get());
+        validatePrice(purchaseAmount);
+        createManualLottoTickets(purchaseAmount, manualLottoTickets);
+
         this.purchaseAmount = purchaseAmount;
     }
 
@@ -60,15 +73,28 @@ public class LottoTickets {
         }
     }
 
-    private void createLottoTickets(int purchaseAmount) {
-        lottoTickets = new ArrayList<>();
-        int ticketCount = purchaseAmount / LottoTicket.TICKET_PRICE;
+    private void validateSize(List<LottoTicket> lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets) {
+            lottoTicket.validateSize();
+        }
+    }
+
+    private void createAutoLottoTickets(int purchaseAmount, int manualLottoTicketCount) {
+        int ticketCount = purchaseAmount / LottoTicket.TICKET_PRICE - manualLottoTicketCount;
 
         for (int i = 0; i < ticketCount; i++) {
             lottoTickets.add(new LottoTicket(AutomaticLottoNumber.createNumbers()));
         }
     }
 
+    private void createManualLottoTickets(int purchaseAmount, ManualLottoTickets manualLottoTickets) {
+        int manualLottoTicketCount = manualLottoTickets.size();
+        createAutoLottoTickets(purchaseAmount, manualLottoTickets.size());
+
+        if (manualLottoTicketCount > 0) {
+            lottoTickets.addAll(manualLottoTickets.get());
+        }
+    }
 
     @Override
     public boolean equals(Object o) {

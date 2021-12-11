@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -15,8 +16,17 @@ public class LottoTicket {
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(Set<LottoNumber> lottoNumbers) {
-        validateSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+        validateSize();
+    }
+
+    public static LottoTicket createManualLottoTicket(List<String> manualLottoNumbers) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        for (String manualLottoNumber : manualLottoNumbers) {
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(manualLottoNumber)));
+        }
+
+        return new LottoTicket(lottoNumbers);
     }
 
     public int getCountOfMatch(LottoTicket winningNumbers) {
@@ -30,7 +40,7 @@ public class LottoTicket {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    private void validateSize(Set<LottoNumber> lottoNumbers) {
+    public void validateSize() {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
         }

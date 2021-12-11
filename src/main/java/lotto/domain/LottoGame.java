@@ -4,8 +4,8 @@ public class LottoGame {
 
     private final LottoTickets lottoTickets;
 
-    public LottoGame(int purchaseAmount) {
-        lottoTickets = new LottoTickets(purchaseAmount);
+    public LottoGame(int purchaseAmount, ManualLottoTickets manualLottoTickets) {
+        lottoTickets = new LottoTickets(manualLottoTickets, purchaseAmount);
     }
 
     public LottoTickets get() {

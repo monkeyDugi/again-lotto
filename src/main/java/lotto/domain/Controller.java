@@ -7,11 +7,14 @@ public class Controller {
 
     public static void run() {
         int purchaseAmount = InputView.requirePurchaseAmount();
-        LottoGame lottoGame = new LottoGame(purchaseAmount);
-        InputView.confirmPurchaseCount(purchaseAmount, lottoGame.get());
+        int manualLottoTicketCount = InputView.requireManualLottoTicketCount();
+        ManualLottoTickets manualLottoTickets = InputView.requireManualLottoTickets(manualLottoTicketCount);
 
-        LottoTicket winningNumbers = new LottoTicket(ResultView.requireWinningNumber());
-        LottoNumber bonusNumber = new LottoNumber(ResultView.requireBonusNumber());
+        LottoGame lottoGame = new LottoGame(purchaseAmount, manualLottoTickets);
+        ResultView.confirmPurchaseCount(purchaseAmount, lottoGame.get(), manualLottoTicketCount);
+
+        LottoTicket winningNumbers = new LottoTicket(InputView.requireWinningNumber());
+        LottoNumber bonusNumber = new LottoNumber(InputView.requireBonusNumber());
         WinningStatistics winningStatistics = new WinningStatistics(lottoGame.get(), winningNumbers, bonusNumber);
         ResultView.printWinningStats(winningStatistics);
     }

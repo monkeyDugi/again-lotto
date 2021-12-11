@@ -16,9 +16,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketsTest {
 
-    @DisplayName("천원 단위로 로또 티켓을 생성한다.")
+    @DisplayName("천원 단위로 로또 티켓을 자동 생성한다.(자동만 구매)")
     @Test
-    void createLottoTicket() {
+    void createAutoLottoTicket() {
         // given
         int price = 2000;
 
@@ -29,14 +29,64 @@ class LottoTicketsTest {
         assertThat(lottoTickets.size()).isEqualTo(2);
     }
 
+    @DisplayName("수동으로만 구매할 경우 수동 티켓만 발행된다.")
+    @Test
+    void createManualLottoTicket() {
+        // given
+        int purchaseAmount = 3000;
+
+        List<String> manualLottoNumber1 = Arrays.asList("1", "2", "3", "4", "5", "6");
+        List<String> manualLottoNumber2 = Arrays.asList("1", "2", "3", "4", "5", "7");
+        List<String> manualLottoNumber3 = Arrays.asList("1", "2", "3", "4", "5", "8");
+
+        LottoTicket manualLottoTicket1 = LottoTicket.createManualLottoTicket(manualLottoNumber1);
+        LottoTicket manualLottoTicket2 = LottoTicket.createManualLottoTicket(manualLottoNumber2);
+        LottoTicket manualLottoTicket3 = LottoTicket.createManualLottoTicket(manualLottoNumber3);
+
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+        manualLottoTickets.add(manualLottoTicket1);
+        manualLottoTickets.add(manualLottoTicket2);
+        manualLottoTickets.add(manualLottoTicket3);
+
+        LottoTickets lottoTickets = new LottoTickets(new ManualLottoTickets(manualLottoTickets), purchaseAmount);
+
+        // then
+        assertThat(lottoTickets.size()).isEqualTo(3);
+    }
+
+    @DisplayName("수동, 자동 모두 구매할 경우 같이 구매된다.")
+    @Test
+    void createManualLottoTicketAndAutoLottoTicket() {
+        // given
+        int purchaseAmount = 5000;
+
+        List<String> manualLottoNumber1 = Arrays.asList("1", "2", "3", "4", "5", "6");
+        List<String> manualLottoNumber2 = Arrays.asList("1", "2", "3", "4", "5", "7");
+        List<String> manualLottoNumber3 = Arrays.asList("1", "2", "3", "4", "5", "8");
+
+        LottoTicket manualLottoTicket1 = LottoTicket.createManualLottoTicket(manualLottoNumber1);
+        LottoTicket manualLottoTicket2 = LottoTicket.createManualLottoTicket(manualLottoNumber2);
+        LottoTicket manualLottoTicket3 = LottoTicket.createManualLottoTicket(manualLottoNumber3);
+
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+        manualLottoTickets.add(manualLottoTicket1);
+        manualLottoTickets.add(manualLottoTicket2);
+        manualLottoTickets.add(manualLottoTicket3);
+
+        LottoTickets lottoTickets = new LottoTickets(new ManualLottoTickets(manualLottoTickets), purchaseAmount);
+
+        // then
+        assertThat(lottoTickets.size()).isEqualTo(5);
+    }
+
     @DisplayName("최소 구매 금액은 1000원이다.")
     @Test
     void validateMinimumPrice() {
         // given
-        int price = 900;
+        int purchaseAmount = 900;
 
         // when
-        assertThatThrownBy(() -> new LottoTickets(price))
+        assertThatThrownBy(() -> new LottoTickets(purchaseAmount))
                 // then
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("최소 구매 금액은 1000원 입니다.");
@@ -46,10 +96,10 @@ class LottoTicketsTest {
     @Test
     void validateTicketPrice() {
         // given
-        int price = 1100;
+        int purchaseAmount = 1100;
 
         // when
-        assertThatThrownBy(() -> new LottoTickets(price))
+        assertThatThrownBy(() -> new LottoTickets(purchaseAmount))
                 // then
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구매 금액은 1000원 단위만 가능합니다.");

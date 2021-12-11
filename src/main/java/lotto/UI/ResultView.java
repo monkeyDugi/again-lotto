@@ -1,34 +1,30 @@
 package lotto.UI;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
 import lotto.domain.WinningStatistics;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
 
 public class ResultView {
 
-    private static final Scanner sc = new Scanner(System.in);
+    public static void confirmPurchaseCount(int purchaseAmount, LottoTickets lottoTickets, int manualLottoTicketCount) {
+        int autoLottoTicketCount = purchaseAmount / LottoTicket.TICKET_PRICE - manualLottoTicketCount;
 
-    public static Set<LottoNumber> requireWinningNumber() {
-        System.out.println();
-        System.out.println("지난 주 당첨 번호를 입력해 주세요");
+        StringBuilder sb = new StringBuilder();
+        sb.append("수동으로 ")
+                .append(manualLottoTicketCount)
+                .append("장, ");
+        sb.append("자동으로 ")
+                .append(autoLottoTicketCount)
+                .append("장을 구매했습니다.");
 
-        Set<LottoNumber> winningNumbers = new HashSet<>();
-        String[] winningNumberArr = sc.nextLine().split(",");
-        for (String winningNumber : winningNumberArr) {
-            winningNumbers.add(new LottoNumber(Integer.parseInt(winningNumber)));
+        System.out.println(sb);
+
+        for (LottoTicket lottoTicket : lottoTickets.get()) {
+            System.out.println(lottoTicket);
         }
-
-        return winningNumbers;
-    }
-
-    public static int requireBonusNumber() {
-        System.out.println("보너스 번호를 입력해 주세요.");
-        return sc.nextInt();
     }
 
     public static void printWinningStats(WinningStatistics winningStatistics) {
