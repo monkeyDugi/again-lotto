@@ -73,8 +73,8 @@ class LottoTicketsTest {
                         , new LottoNumber(4)
                         , new LottoNumber(5)
                         , new LottoNumber(7)));
-        List<LottoNumber> winningLottoNumbers =
-                new ArrayList<>(Arrays.asList(new LottoNumber(1)
+        Set<LottoNumber> winningLottoNumbers =
+                new HashSet<>(Arrays.asList(new LottoNumber(1)
                         , new LottoNumber(2)
                         , new LottoNumber(3)
                         , new LottoNumber(10)
@@ -91,7 +91,7 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList, purchaseAmount);
 
         // when
-        Map<Rank, Integer> byRankCountOfMatches = lottoTickets.getByRankCountOfMatches(winningLottoNumbers, 30);
+        Map<Rank, Integer> byRankCountOfMatches = lottoTickets.getByRankCountOfMatches(new LottoTicket(winningLottoNumbers), new LottoNumber(30));
 
         // then
         Map<Rank, Integer> expectedByRankCountOfMatches = new HashMap<>();

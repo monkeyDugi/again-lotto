@@ -1,17 +1,16 @@
 package lotto.domain;
 
 import java.text.DecimalFormat;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class WinningStatistics {
 
     private final LottoTickets lottoTickets;
-    private final List<LottoNumber> winningNumbers;
-    private final int bonusNumber;
+    private final LottoTicket winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningStatistics(LottoTickets lottoTickets, List<LottoNumber> winningNumbers, int bonusNumber) {
+    public WinningStatistics(LottoTickets lottoTickets, LottoTicket winningNumbers, LottoNumber bonusNumber) {
         this.lottoTickets = lottoTickets;
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;

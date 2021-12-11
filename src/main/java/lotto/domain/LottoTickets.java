@@ -25,7 +25,7 @@ public class LottoTickets {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public Map<Rank, Integer> getByRankCountOfMatches(List<LottoNumber> winningNumbers, int bonusNumber) {
+    public Map<Rank, Integer> getByRankCountOfMatches(LottoTicket winningNumbers, LottoNumber bonusNumber) {
         Map<Rank, Integer> ranks = Rank.getDefaultRanks();
         for (LottoTicket lottoTicket : lottoTickets) {
             boolean isBonusNumber = lottoTicket.equalsMatchBonus(bonusNumber);

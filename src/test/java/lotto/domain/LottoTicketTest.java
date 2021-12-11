@@ -84,8 +84,8 @@ class LottoTicketTest {
                         , new LottoNumber(4)
                         , new LottoNumber(5)
                         , new LottoNumber(6)));
-        List<LottoNumber> winningLottoNumbers =
-                new ArrayList<>(Arrays.asList(new LottoNumber(1)
+        Set<LottoNumber> winningLottoNumbers =
+                new HashSet<>(Arrays.asList(new LottoNumber(1)
                         , new LottoNumber(2)
                         , new LottoNumber(3)
                         , new LottoNumber(4)
@@ -95,7 +95,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoLottoNumbers);
 
         // when
-        int numberOfWins = lottoTicket.getCountOfMatch(winningLottoNumbers);
+        int numberOfWins = lottoTicket.getCountOfMatch(new LottoTicket(winningLottoNumbers));
 
         // then
         assertThat(numberOfWins).isEqualTo(5);
@@ -123,8 +123,8 @@ class LottoTicketTest {
                         , new LottoNumber(5)
                         , new LottoNumber(6)));
 
-        int trueBonusNumber = 3;
-        int falseBonusNumber = 7;
+        LottoNumber trueBonusNumber = new LottoNumber(3);
+        LottoNumber falseBonusNumber = new LottoNumber(7);
 
         LottoTicket lottoTicket = new LottoTicket(lottoLottoNumbers);
 

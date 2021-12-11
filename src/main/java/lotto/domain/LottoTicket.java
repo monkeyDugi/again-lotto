@@ -19,15 +19,15 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int getCountOfMatch(List<LottoNumber> winningNumbers) {
-        List<LottoNumber> copyWinningNumbers = new ArrayList<>(winningNumbers);
+    public int getCountOfMatch(LottoTicket winningNumbers) {
+        List<LottoNumber> copyWinningNumbers = new ArrayList<>(winningNumbers.lottoNumbers);
         copyWinningNumbers.retainAll(lottoNumbers);
 
         return copyWinningNumbers.size();
     }
 
-    public boolean equalsMatchBonus(int bonusNumber) {
-        return lottoNumbers.contains(new LottoNumber(bonusNumber));
+    public boolean equalsMatchBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     private void validateSize(Set<LottoNumber> lottoNumbers) {
