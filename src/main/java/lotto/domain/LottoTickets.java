@@ -25,12 +25,13 @@ public class LottoTickets {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public Map<Rank, Integer> getByRankCountOfMatches(List<LottoNumber> winningNumbers) {
+    public Map<Rank, Integer> getByRankCountOfMatches(List<LottoNumber> winningNumbers, int bonusNumber) {
         Map<Rank, Integer> ranks = Rank.getDefaultRanks();
         for (LottoTicket lottoTicket : lottoTickets) {
+            boolean isBonusNumber = lottoTicket.equalsMatchBonus(bonusNumber);
             int countOfMatch = lottoTicket.getCountOfMatch(winningNumbers);
-            Rank rank = Rank.valueOf(countOfMatch);
 
+            Rank rank = Rank.valueOf(countOfMatch, isBonusNumber);
             ranks.merge(rank, 1, Integer::sum);
         }
 

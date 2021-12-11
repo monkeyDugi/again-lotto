@@ -11,9 +11,10 @@ import java.util.stream.Stream;
 public enum Rank {
 
     FIRST_PRICE(6, 2_000_000_000),
-    SECOND_PRICE(5, 1_500_000),
-    THIRD_PRICE(4, 50_000),
-    FOUR_PRICE(3, 5_000),
+    SECOND_PRICE(5, 30_000_000),
+    THIRD_PRICE(5, 1_500_000),
+    FOUR_PRICE(4, 50_000),
+    FIFTH_PRICE(3, 5_000),
     MISS(0, 0);
 
     private static final int MINIMUM_COUNT_OF_MATCH = 0;
@@ -22,13 +23,20 @@ public enum Rank {
     private final int countOfMatch;
     private final int winningAmount;
 
-    Rank(int countOfMatch, int winningAmount) {
+    Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
-        this.winningAmount = winningAmount;
+        this.winningAmount = winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch) {
+    public static Rank valueOf(int countOfMatch, boolean isMatchBonus) {
         validateCountOfMatch(countOfMatch);
+
+        if (countOfMatch == FOUR_PRICE.countOfMatch && isMatchBonus) {
+            return Rank.SECOND_PRICE;
+        }
+        if (countOfMatch == THIRD_PRICE.countOfMatch) {
+            return Rank.THIRD_PRICE;
+        }
 
         Stream<Rank> stream = Arrays.stream(values());
         return stream.filter(rank -> rank.equalsCountOfMatch(countOfMatch))

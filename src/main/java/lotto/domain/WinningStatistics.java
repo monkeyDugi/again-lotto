@@ -9,10 +9,12 @@ public class WinningStatistics {
 
     private final LottoTickets lottoTickets;
     private final List<LottoNumber> winningNumbers;
+    private final int bonusNumber;
 
-    public WinningStatistics(LottoTickets lottoTickets, List<LottoNumber> winningNumbers) {
+    public WinningStatistics(LottoTickets lottoTickets, List<LottoNumber> winningNumbers, int bonusNumber) {
         this.lottoTickets = lottoTickets;
         this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
     public double calculateYields() {
@@ -27,7 +29,7 @@ public class WinningStatistics {
     }
 
     public Map<Rank, Integer> getByRankCountOfMatches() {
-        return lottoTickets.getByRankCountOfMatches(winningNumbers);
+        return lottoTickets.getByRankCountOfMatches(winningNumbers, bonusNumber);
     }
 
     private double calculateYields(int totalRankAmount) {

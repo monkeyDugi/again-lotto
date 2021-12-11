@@ -91,14 +91,15 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList, purchaseAmount);
 
         // when
-        Map<Rank, Integer> byRankCountOfMatches = lottoTickets.getByRankCountOfMatches(winningLottoNumbers);
+        Map<Rank, Integer> byRankCountOfMatches = lottoTickets.getByRankCountOfMatches(winningLottoNumbers, 30);
 
         // then
         Map<Rank, Integer> expectedByRankCountOfMatches = new HashMap<>();
         expectedByRankCountOfMatches.put(Rank.FIRST_PRICE, 0);
         expectedByRankCountOfMatches.put(Rank.SECOND_PRICE, 0);
         expectedByRankCountOfMatches.put(Rank.THIRD_PRICE, 0);
-        expectedByRankCountOfMatches.put(Rank.FOUR_PRICE, 2);
+        expectedByRankCountOfMatches.put(Rank.FOUR_PRICE, 0);
+        expectedByRankCountOfMatches.put(Rank.FIFTH_PRICE, 2);
 
         assertThat(byRankCountOfMatches).isEqualTo(expectedByRankCountOfMatches);
     }

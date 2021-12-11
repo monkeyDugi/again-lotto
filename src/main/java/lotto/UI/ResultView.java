@@ -26,6 +26,11 @@ public class ResultView {
         return winningNumbers;
     }
 
+    public static int requireBonusNumber() {
+        System.out.println("보너스 번호를 입력해 주세요.");
+        return sc.nextInt();
+    }
+
     public static void printWinningStats(WinningStatistics winningStatistics) {
         Map<Rank, Integer> byRankCountOfMatches = winningStatistics.getByRankCountOfMatches();
         for (Rank rank : byRankCountOfMatches.keySet()) {
