@@ -39,9 +39,9 @@ class LottoTicketsTest {
         List<String> manualLottoNumber2 = Arrays.asList("1", "2", "3", "4", "5", "7");
         List<String> manualLottoNumber3 = Arrays.asList("1", "2", "3", "4", "5", "8");
 
-        LottoTicket manualLottoTicket1 = LottoTicket.createManualLottoTicket(manualLottoNumber1);
-        LottoTicket manualLottoTicket2 = LottoTicket.createManualLottoTicket(manualLottoNumber2);
-        LottoTicket manualLottoTicket3 = LottoTicket.createManualLottoTicket(manualLottoNumber3);
+        LottoTicket manualLottoTicket1 = new LottoTicket(manualLottoNumber1);
+        LottoTicket manualLottoTicket2 = new LottoTicket(manualLottoNumber2);
+        LottoTicket manualLottoTicket3 = new LottoTicket(manualLottoNumber3);
 
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
         manualLottoTickets.add(manualLottoTicket1);
@@ -64,9 +64,9 @@ class LottoTicketsTest {
         List<String> manualLottoNumber2 = Arrays.asList("1", "2", "3", "4", "5", "7");
         List<String> manualLottoNumber3 = Arrays.asList("1", "2", "3", "4", "5", "8");
 
-        LottoTicket manualLottoTicket1 = LottoTicket.createManualLottoTicket(manualLottoNumber1);
-        LottoTicket manualLottoTicket2 = LottoTicket.createManualLottoTicket(manualLottoNumber2);
-        LottoTicket manualLottoTicket3 = LottoTicket.createManualLottoTicket(manualLottoNumber3);
+        LottoTicket manualLottoTicket1 = new LottoTicket(manualLottoNumber1);
+        LottoTicket manualLottoTicket2 = new LottoTicket(manualLottoNumber2);
+        LottoTicket manualLottoTicket3 = new LottoTicket(manualLottoNumber3);
 
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
         manualLottoTickets.add(manualLottoTicket1);

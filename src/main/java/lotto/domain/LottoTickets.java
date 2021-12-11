@@ -22,8 +22,8 @@ public class LottoTickets {
         this.purchaseAmount = purchaseAmount;
     }
 
+    // 테스트 용도
     public LottoTickets(List<LottoTicket> lottoTickets, int purchaseAmount) {
-        validateSize(lottoTickets);
         validatePrice(purchaseAmount);
 
         this.lottoTickets = lottoTickets;
@@ -31,7 +31,6 @@ public class LottoTickets {
     }
 
     public LottoTickets(ManualLottoTickets manualLottoTickets, int purchaseAmount) {
-        validateSize(manualLottoTickets.get());
         validatePrice(purchaseAmount);
         createManualLottoTickets(purchaseAmount, manualLottoTickets);
 
@@ -70,12 +69,6 @@ public class LottoTickets {
 
         if (purchaseAmount % LottoTicket.TICKET_PRICE != 0) {
             throw new IllegalArgumentException("구매 금액은 " + LottoTicket.TICKET_PRICE + "원 단위만 가능합니다.");
-        }
-    }
-
-    private void validateSize(List<LottoTicket> lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets) {
-            lottoTicket.validateSize();
         }
     }
 

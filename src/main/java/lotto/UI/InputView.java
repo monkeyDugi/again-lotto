@@ -35,7 +35,7 @@ public class InputView {
         for (int i = 0; i < manualLottoTicketCount; i++) {
             Scanner sc = new Scanner(System.in);
             String[] inputManualLottoNumbers = sc.nextLine().split(",");
-            LottoTicket manualLottoTicket = LottoTicket.createManualLottoTicket(Arrays.asList(inputManualLottoNumbers));
+            LottoTicket manualLottoTicket = new LottoTicket(Arrays.asList(inputManualLottoNumbers));
             manualLottoTickets.add(manualLottoTicket);
         }
 

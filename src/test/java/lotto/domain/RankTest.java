@@ -78,23 +78,4 @@ class RankTest {
         // then
         assertThat(defaultRanks).isEqualTo(expectedRanks);
     }
-
-    @DisplayName("")
-    @Test
-    void d() {
-        // given
-        Map<Rank, Integer> expectedRanks = new LinkedHashMap<>();
-        Rank[] rankArr = Rank.values();
-        for (Rank rank : rankArr) {
-            expectedRanks.put(rank, 0);
-        }
-
-        expectedRanks.remove(Rank.MISS);
-
-        // when
-        Map<Rank, Integer> defaultRanks = Rank.getDefaultRanks();
-
-        // then
-        assertThat(defaultRanks).isEqualTo(expectedRanks);
-    }
 }

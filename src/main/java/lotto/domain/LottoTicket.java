@@ -20,13 +20,14 @@ public class LottoTicket {
         validateSize();
     }
 
-    public static LottoTicket createManualLottoTicket(List<String> manualLottoNumbers) {
+    public LottoTicket(List<String> manualLottoNumbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (String manualLottoNumber : manualLottoNumbers) {
             lottoNumbers.add(new LottoNumber(Integer.parseInt(manualLottoNumber)));
         }
 
-        return new LottoTicket(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+        validateSize();
     }
 
     public int getCountOfMatch(LottoTicket winningNumbers) {
