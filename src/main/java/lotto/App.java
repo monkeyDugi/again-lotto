@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.Controller;
+import lotto.UI.Controller;
 
 public class App {
 

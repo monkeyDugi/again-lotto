@@ -1,46 +1,36 @@
 package lotto.UI;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
+import lotto.domain.Money;
 import lotto.domain.Rank;
-import lotto.domain.WinningStatistics;
+import lotto.domain.Ticket;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 public class ResultView {
 
-    private static final Scanner sc = new Scanner(System.in);
-
-    public static List<LottoNumber> requireWinningNumber() {
-        System.out.println();
-        System.out.println("지난 주 당첨 번호를 입력해 주세요");
-
-        List<LottoNumber> winningNumbers = new ArrayList<>();
-        String[] winningNumberArr = sc.nextLine().split(",");
-        for (String winningNumber : winningNumberArr) {
-            winningNumbers.add(new LottoNumber(Integer.parseInt(winningNumber)));
+    public static void confirmPurchaseTicket(List<Ticket> tickets, Money purchaseMoney) {
+        System.out.println(purchaseMoney.calculateCountOfBuyingTicket() + "개를 구매했습니다.");
+        for (Ticket ticket : tickets) {
+            System.out.println(ticket);
         }
-
-        return winningNumbers;
     }
 
-    public static int requireBonusNumber() {
-        System.out.println("보너스 번호를 입력해 주세요.");
-        return sc.nextInt();
-    }
+    public static void printWinningStats(LottoResult lottoResult, Money purchaseMoney) {
+        System.out.println("당첨 통계");
+        System.out.println("=============");
 
-    public static void printWinningStats(WinningStatistics winningStatistics) {
-        Map<Rank, Integer> byRankCountOfMatches = winningStatistics.getByRankCountOfMatches();
-        for (Rank rank : byRankCountOfMatches.keySet()) {
-            int byRankCountOfMatch = byRankCountOfMatches.get(rank);
-            int winningAmount = rank.getWinningAmount();
-            int countOfMatch = rank.getCountOfMatch();
-
-            System.out.println(countOfMatch + "개 일치 (" + winningAmount + "원) - " + byRankCountOfMatch + "개");
+        Rank[] ranks = Rank.values();
+        for (Rank rank : ranks) {
+            System.out.println(
+                    rank.getCountOfMatch() +
+                            "개 일치 (" +
+                            rank.getWinningMoney() +
+                            "원) - " +
+                            lottoResult.getValue(rank) +
+                            "개"
+            );
         }
-
-        System.out.println("총 수익률을 " + winningStatistics.calculateYields() + "입니다.");
+        System.out.println("총 수익률 = " + purchaseMoney.calculateProfitRate(lottoResult.getPrize()));
     }
 }

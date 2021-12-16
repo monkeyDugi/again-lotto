@@ -1,81 +1,60 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.stream.Stream;
-
-/**
- * 당첨금 관리
- */
 public enum Rank {
 
-    FIRST_PRICE(6, 2_000_000_000),
-    SECOND_PRICE(5, 30_000_000),
-    THIRD_PRICE(5, 1_500_000),
-    FOUR_PRICE(4, 50_000),
-    FIFTH_PRICE(3, 5_000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private static final int MINIMUM_COUNT_OF_MATCH = 0;
-    private static final int MAXIMUM_COUNT_OF_MATCH = 6;
+    private static final int WINNING_MINIMUM_COUNT = 3;
 
-    private final int countOfMatch;
-    private final int winningAmount;
+    private int countOfMatch;
+    private int winningMoney;
 
     Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
-        this.winningAmount = winningMoney;
+        this.winningMoney = winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean isMatchBonus) {
-        validateCountOfMatch(countOfMatch);
-
-        if (countOfMatch == FOUR_PRICE.countOfMatch && isMatchBonus) {
-            return Rank.SECOND_PRICE;
-        }
-        if (countOfMatch == THIRD_PRICE.countOfMatch) {
-            return Rank.THIRD_PRICE;
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        if (countOfMatch < WINNING_MINIMUM_COUNT) {
+            return MISS;
         }
 
-        Stream<Rank> stream = Arrays.stream(values());
-        return stream.filter(rank -> rank.equalsCountOfMatch(countOfMatch))
-                     .findFirst()
-                     .orElse(MISS);
+        Rank rank = valueOf(countOfMatch);
+        if (SECOND.matchCount(countOfMatch)) {
+            return matchBonus ? SECOND : THIRD;
+        }
+        return rank;
     }
 
-    public static Map<Rank, Integer> getDefaultRanks() {
-        Map<Rank, Integer> ranks = new LinkedHashMap<>();
-
-        Rank[] rankArr = Rank.values();
-        for (Rank rank : rankArr) {
-            ranks.put(rank, 0);
-        }
-
-        ranks.remove(MISS);
-
-        return ranks;
-    }
-
-    public int getWinningAmount() {
-        return winningAmount;
+    public Money prize(int countOfMatchTicket) {
+        return new Money(countOfMatchTicket * winningMoney);
     }
 
     public int getCountOfMatch() {
         return countOfMatch;
     }
 
-    private static void validateCountOfMatch(int countOfMatch) {
-        if (countOfMatch < MINIMUM_COUNT_OF_MATCH) {
-            throw new IllegalArgumentException("맞춘 개수는 " + MINIMUM_COUNT_OF_MATCH + "보다 작을 수 없습니다.");
-        }
-
-        if (countOfMatch > MAXIMUM_COUNT_OF_MATCH) {
-            throw new IllegalArgumentException("맞춘 개수는 " + MAXIMUM_COUNT_OF_MATCH + "보다 클 수 없습니다.");
-        }
+    public int getWinningMoney() {
+        return winningMoney;
     }
 
-    private boolean equalsCountOfMatch(int countOfMatch) {
+    private static Rank valueOf(int countOfMatch) {
+        for (Rank rank : values()) {
+            if (rank.matchCount(countOfMatch)) {
+                return rank;
+            }
+        }
+        throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다.");
+    }
+
+    private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
     }
+
+
 }
