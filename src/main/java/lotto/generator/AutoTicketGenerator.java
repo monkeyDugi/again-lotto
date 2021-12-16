@@ -1,20 +1,20 @@
 package lotto.generator;
 
-import lotto.domain.LottoGenerator;
 import lotto.domain.Money;
 import lotto.domain.Ticket;
+import lotto.domain.TicketGenerator;
 import lotto.domain.TicketNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoLottoGenerator implements LottoGenerator {
+public class AutoTicketGenerator implements TicketGenerator {
 
     @Override
-    public List<Ticket> generate(Money money) {
+    public List<Ticket> generate(Money purchaseMoney) {
         List<Ticket> tickets = new ArrayList<>();
-        int countOfBuyingTicket = money.calculateCountOfBuyingTicket();
+        int countOfBuyingTicket = purchaseMoney.calculateCountOfBuyingTicket();
         for (int i = 0; i < countOfBuyingTicket; i++) {
             tickets.add(generateAuto());
         }

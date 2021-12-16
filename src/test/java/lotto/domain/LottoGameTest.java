@@ -34,6 +34,7 @@ class LottoGameTest {
         assertThat(lottoResult.getValue(Rank.THIRD)).isEqualTo(1);
         assertThat(lottoResult.getValue(Rank.FOURTH)).isEqualTo(1);
         assertThat(lottoResult.getValue(Rank.FIFTH)).isEqualTo(1);
+        System.out.println(lottoGame.toString());
 //        assertThat(lottoResult.getPrize()).isEqualTo(new Money(4_555_000));
     }
 }

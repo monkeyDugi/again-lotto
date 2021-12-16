@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,8 +8,8 @@ public class LottoGame {
 
     private final List<Ticket> tickets;
 
-    public LottoGame(Money money, LottoGenerator lottoGenerator) {
-        this.tickets = lottoGenerator.generate(money);
+    public LottoGame(Money purchaseMoney, TicketGenerator lottoGenerator) {
+        this.tickets = lottoGenerator.generate(purchaseMoney);
     }
 
     public LottoResult match(WinningTicket winningTicket) {
@@ -17,6 +18,10 @@ public class LottoGame {
             lottoResult.putRank(winningTicket.match(ticket));
         }
         return lottoResult;
+    }
+
+    public List<Ticket> get() {
+        return Collections.unmodifiableList(tickets);
     }
 
     @Override

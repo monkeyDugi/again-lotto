@@ -14,7 +14,8 @@ public class LottoResult {
         }
     }
 
-    public void putRank(Rank rank) {
+    // UI에서 사용하지 못하도록.
+    void putRank(Rank rank) {
         result.put(rank, result.get(rank) + 1);
     }
 

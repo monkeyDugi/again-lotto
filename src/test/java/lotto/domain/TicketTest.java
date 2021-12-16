@@ -82,4 +82,16 @@ class TicketTest {
         // then
         assertThat(winningTicket.match(ticket)).isEqualTo(5);
     }
+
+    @Test
+    void comma로_티켓_생성() {
+        // given
+        String inputManualTickets = "1,2,3,4,5,6";
+
+        // when
+        Ticket ticket = Ticket.ofComma(inputManualTickets);
+
+        // then
+        assertThat(ticket).isEqualTo(Ticket.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    }
 }

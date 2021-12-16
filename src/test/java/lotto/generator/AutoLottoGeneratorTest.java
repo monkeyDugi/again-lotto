@@ -1,8 +1,8 @@
 package lotto.generator;
 
-import lotto.domain.LottoGenerator;
 import lotto.domain.Money;
 import lotto.domain.Ticket;
+import lotto.domain.TicketGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,10 +15,10 @@ class AutoLottoGeneratorTest {
     @Test
     void 자동_티켓_생성() {
         Money purchaseAmount = new Money(10000);
-        LottoGenerator lottoGenerator = new AutoLottoGenerator();
+        TicketGenerator ticketGenerator = new AutoTicketGenerator();
 
         // when
-        List<Ticket> tickets = lottoGenerator.generate(purchaseAmount);
+        List<Ticket> tickets = ticketGenerator.generate(purchaseAmount);
 
         // then
         Assertions.assertThat(tickets.size()).isEqualTo(10);

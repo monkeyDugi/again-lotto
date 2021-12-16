@@ -20,7 +20,7 @@ public class TicketNumber {
 
     private void validate(int number) {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException("유효 범위를 벗어난 번호입니다.");
+            throw new IllegalArgumentException("유효 범위를 벗어난 번호입니다.(" + number + ")");
         }
     }
 
@@ -35,5 +35,10 @@ public class TicketNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return number + "";
     }
 }

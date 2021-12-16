@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -22,6 +23,15 @@ public class Ticket {
             ticket.add(TicketNumber.of(number));
         }
         return new Ticket(ticket);
+    }
+
+    public static Ticket ofComma(String value) {
+        List<Integer> numbers = new ArrayList<>();
+        String[] split = value.split(",");
+        for (String s : split) {
+            numbers.add(Integer.parseInt(s));
+        }
+        return Ticket.of(numbers);
     }
 
     public int match(Ticket target) {
@@ -60,5 +70,10 @@ public class Ticket {
     @Override
     public int hashCode() {
         return Objects.hash(ticket);
+    }
+
+    @Override
+    public String toString() {
+        return ticket.toString();
     }
 }

@@ -19,9 +19,9 @@ class MoneyTest {
         assertThat(money.calculateCountOfBuyingTicket()).isEqualTo(10);
     }
     
-    @DisplayName("구매금액과 자동 티켓의 개수를 제외한 것이 수동 티켓이다.")
+    @DisplayName("기준 금액(수동, 자동)에서 파라미터로 온 티켓 장수를 계산하여 새로운 금액을 계산한다.")
     @Test
-    void 수동_티켓_금액_생성() {
+    void 티켓_금액_생성() {
         // given
         Money money = new Money(10000);
         int autoCountOfBuyingTicket = 3;

@@ -16,8 +16,8 @@ public class Money {
         return money / MONEY_PER_LOTTO;
     }
 
-    public Money buyManual(int autoCountOfBuyingTicket) {
-        return new Money(money - autoCountOfBuyingTicket * MONEY_PER_LOTTO);
+    public Money buyManual(int countOfBuyingTicket) {
+        return new Money(money - countOfBuyingTicket * MONEY_PER_LOTTO);
     }
 
     public Money sum(Money money) {
